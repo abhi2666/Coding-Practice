@@ -1,15 +1,13 @@
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-    vector<vector<string>>vect;
-    vector<string>ans;
-    ans.push_back("hello");
-    ans.push_back("world");
-    vect.push_back(ans);
-    cout<<ans[1][1]<<endl;
-    cout<<"hello"<<endl;
+    vector<vector<int>>vect = {{8,0}, {1,3},{2,6},{15,18}};
+    sort(vect.begin(), vect.end());
+    for(int i = 0; i < vect.size(); i++)
+    {
+        cout<<vect[i][0]<<" "<<vect[i][1]<<endl;
+    }
     return 0;
 }
