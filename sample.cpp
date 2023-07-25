@@ -1,43 +1,44 @@
-class Solution
-{
+class Solution {
 public:
-    // Function to return list containing vertices in Topological order.
-    vector<int> topoSort(int V, vector<int> adj[])
-{
-    int indegree[V] = {0};
-    // traverse the adjacency list and fill the indegree
-    for (int i = 0; i < V; i++)
-    {
-        for (auto it : adj[i])
-        {
-            indegree[it]++;
-        }
-    }
-
-    queue<int> q; // will store the elements
-    for (int i = 0; i < V; i++)
-    {
-        if (indegree[i] == 0) q.push(i);
-    }
-
-    vector<int> topo;
-    while (!q.empty())
-    {
-        int node = q.front();
-        q.pop();
-        topo.push_back(node);
-
-        // for this element..check for elements that it is providing an edge to.
-        for (auto it : adj[node])
-        {
-            indegree[it]--;
-            if (indegree[it] == 0)
-            {
-                q.push(it);
+    bool dfs(int i, vector<int>& vis, vector<vector<int>>& adj, vector<vector<int>>& prerequisites, stack<int>& st){
+        vis[i] = 1;
+        for(auto it : adj[i]){
+            if (vis[it] == 0) {
+                if (dfs(it, vis, adj, prerequisites, st)) {
+                    return true;
+                }
+            } else if (vis[it] == 1) {
+                return true; // Cycle detected
             }
         }
+        vis[i] = 2;
+        st.push(i);
+        return false;
     }
-    return topo;
-}
 
+    vector<int> findOrder(int V, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> adj(V);
+        vector<int> vis(V, 0);
+
+        for(auto it : prerequisites){
+            adj[it[1]].push_back(it[0]);
+        }
+
+        stack<int> st;
+        for(int i=0; i<V; i++){
+            if(vis[i] == 0){
+                if (dfs(i, vis, adj, prerequisites, st)) {
+                    return {}; // Cycle detected, return an empty vector
+                }
+            }
+        }
+
+        vector<int> ans;
+        while(!st.empty()){
+            ans.push_back(st.top());
+            st.pop();
+        }
+
+        return ans;
+    }
 };

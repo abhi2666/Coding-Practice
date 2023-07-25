@@ -1,19 +1,19 @@
 /*
-Input: numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]]
-Output: [0,2,1,3]
-Explanation: There are a total of 4 courses to take. To take course 3 you should have finished both courses 1 and 2. Both courses 1 and 2 should be taken after you finished course 0.
-So one correct course order is [0,1,2,3]. Another correct ordering is [0,2,1,3].
+Input: numCourses = 2, prerequisites = [[1,0]]
+Output: true
+Explanation: There are a total of 2 courses to take.
+To take course 1 you should have finished course 0. So it is possible.
 
-
-
-Approach --> store the elements with their frequency into the map and sort it in decreasing 
-order of frequency. Then one by one pick element and put it into the vector.
-If any element remain then put it also at the very end.
+// we can apply topo sort to arrange the order and if in any case
+        // topo.size() != n it means that there is a cycle in the graph and
+        // hence we cannot process it.
 */
 
-class Solution {
+class Solution
+{
 public:
-    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+    bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
+    {
         //preparing adjaceny list
         vector<int> adj[numCourses];
         for(auto it : prerequisites){
@@ -51,8 +51,8 @@ public:
                 if(indegree[it] == 0) q.push(it);
             }
         }
-        // if there is any cycle then return {}.
-        if(topo.size() == numCourses) return topo;
-        else return {};
+        // check if the topo sort was successfull and there was no graph
+        if(topo.size() == numCourses) return true;
+        else return false;
     }
 };
