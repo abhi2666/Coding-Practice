@@ -13,7 +13,10 @@ class Solution
     {
         long long sum = arr[0];
         int i =0, j = 0; 
+<<<<<<< HEAD
         if(s == 0) return {-1};
+=======
+>>>>>>> f6bc8012cdf5e4ea8a22a37fef8e910dacb11af9
         while(j < arr.size())
         {
             

@@ -3,9 +3,6 @@ using namespace std;
 
 int main()
 {
-    for(char i  = 'A'; i <= 'Z'; i++)
-    {
-        cout<<i<<endl;
-    }
+    cout<<abs(('e'-'f')%25);
     return 0;
 }
