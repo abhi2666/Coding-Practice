@@ -9,6 +9,7 @@ public:
             res.push_back(temp);
             return;
         }
+        // understand this recursion 
 
         for(int i = 0; i < mp[nums[idx]].size(); i++)
         {
