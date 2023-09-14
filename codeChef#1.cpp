@@ -1,5 +1,5 @@
 // finding the repeating characters in all the strings 
-// can be done with set and map
+// can be done with set and map   
 
 #include<bits/stdc++.h>
 using namespace std;
